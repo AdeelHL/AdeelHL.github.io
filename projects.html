@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — Your Name</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/style.css"/>
+  <style>
+    #projects { padding-top: 10rem; }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+    .project-card:hover { border-color: rgba(124,106,255,0.3); transform: translateY(-4px); }
+    .project-screenshot {
+      width: 100%; aspect-ratio: 16/9;
+      object-fit: cover; display: block;
+      border-bottom: 1px solid var(--border);
+    }
+    .project-screenshot-placeholder {
+      width: 100%; aspect-ratio: 16/9;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .project-body { padding: 1.5rem; }
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      letter-spacing: -0.02em; margin-bottom: 0.6rem;
+    }
+    .project-desc {
+      font-size: 0.82rem; line-height: 1.7;
+      color: var(--muted); margin-bottom: 1.2rem;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .project-arrow {
+      margin-top: 1.2rem;
+      font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .project-card:hover .project-arrow { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav>
+    <a class="nav-logo" href="index.html">dev<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="projects">
+    <div class="section-label">Projects</div>
+    <h2>Things I've<br/>actually <em style="color:var(--accent)">built</em>.</h2>
+    <div class="projects-grid reveal">
+
+      <!-- Project 1 -->
+      <a class="project-card" href="projects/pulse-dashboard.html">
+        <!-- Swap placeholder for: <img class="project-screenshot" src="assets/images/pulse-dashboard.png" alt="Pulse Dashboard"/> -->
+        <div class="project-screenshot-placeholder">screenshot</div>
+        <div class="project-body">
+          <div class="project-title">Pulse Dashboard</div>
+          <p class="project-desc">Real-time analytics platform for SaaS metrics — revenue, churn, MRR trends. Built with WebSockets and time-series data for sub-second updates.</p>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">WebSockets</span>
+          </div>
+          <div class="project-arrow">View Project →</div>
+        </div>
+      </a>
+
+      <!-- Project 2 -->
+      <a class="project-card" href="projects/forge-api.html">
+        <!-- Swap placeholder for: <img class="project-screenshot" src="assets/images/forge-api.png" alt="Forge API"/> -->
+        <div class="project-screenshot-placeholder">screenshot</div>
+        <div class="project-body">
+          <div class="project-title">Forge API</div>
+          <p class="project-desc">RESTful + GraphQL API gateway with auth, rate limiting, and request logging. Handles 50k+ req/min with Redis caching and horizontal scaling.</p>
+          <div class="project-tags">
+            <span class="tag">Node.js</span>
+            <span class="tag">GraphQL</span>
+            <span class="tag">Redis</span>
+            <span class="tag">Docker</span>
+          </div>
+          <div class="project-arrow">View Project →</div>
+        </div>
+      </a>
+
+      <!-- Project 3 -->
+      <a class="project-card" href="projects/shopfront.html">
+        <!-- Swap placeholder for: <img class="project-screenshot" src="assets/images/shopfront.png" alt="Shopfront"/> -->
+        <div class="project-screenshot-placeholder">screenshot</div>
+        <div class="project-body">
+          <div class="project-title">Shopfront</div>
+          <p class="project-desc">Full e-commerce platform with inventory management, Stripe payments, order tracking, and an admin panel — built from scratch in 3 weeks.</p>
+          <div class="project-tags">
+            <span class="tag">Next.js</span>
+            <span class="tag">Stripe</span>
+            <span class="tag">Prisma</span>
+            <span class="tag">TypeScript</span>
+          </div>
+          <div class="project-arrow">View Project →</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 — Designed & built with <em>♥</em></span>
+    <span>yourname<em>.github.io</em></span>
+  </footer>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>
