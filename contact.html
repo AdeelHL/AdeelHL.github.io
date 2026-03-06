@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — Your Name</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/style.css"/>
+  <style>
+    #contact {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding-top: 8rem;
+    }
+    .contact-inner { max-width: 560px; width: 100%; }
+    .contact-inner h2 { margin-bottom: 1rem; }
+    .contact-inner > p {
+      font-size: 0.88rem; line-height: 1.75;
+      color: var(--muted); margin-bottom: 3rem;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; text-align: left; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.45rem; }
+    .form-group label {
+      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-group input, .form-group textarea {
+      background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 4px;
+      padding: 0.85rem 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem; color: var(--text);
+      outline: none; transition: border-color 0.2s; resize: none;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { min-height: 130px; }
+    .btn-submit {
+      padding: 0.9rem 2rem;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 4px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem; letter-spacing: 0.1em;
+      cursor: none; transition: all 0.2s;
+      box-shadow: 0 0 24px rgba(124,106,255,0.25);
+      align-self: flex-start;
+    }
+    .btn-submit:hover { background: #9580ff; box-shadow: 0 0 36px rgba(124,106,255,0.45); transform: translateY(-2px); }
+    .social-row { display: flex; justify-content: center; gap: 2rem; margin-top: 4rem; }
+    .social-link {
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .social-link:hover { color: var(--accent2); }
+
+    @media (max-width: 768px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav>
+    <a class="nav-logo" href="index.html">dev<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="section-label" style="justify-content:center">Contact</div>
+      <h2>Let's build<br/>something <em style="color:var(--accent)">together</em>.</h2>
+      <p>Have a project in mind or just want to talk tech? Drop me a message — I typically respond within 24 hours.</p>
+
+      <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell me about your project..."></textarea>
+        </div>
+        <button class="btn-submit" type="submit">Send Message →</button>
+      </form>
+
+      <div class="social-row reveal">
+        <a class="social-link" href="#">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a class="social-link" href="#">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a class="social-link" href="#">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+          Twitter
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 — Designed & built with <em>♥</em></span>
+    <span>yourname<em>.github.io</em></span>
+  </footer>
+
+  <script src="assets/main.js"></script>
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.btn-submit');
+      btn.textContent = 'Sent! ✓';
+      btn.style.background = 'var(--accent2)';
+      btn.style.color = '#0a0a0f';
+      setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; e.target.reset(); }, 3000);
+    }
+  </script>
+</body>
+</html>
