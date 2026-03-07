@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Projects</title>
+  <title>Projects — Adeel</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/style.css"/>
   <style>
@@ -65,7 +65,7 @@
 
   <section id="projects">
     <div class="section-label">Projects</div>
-    <h2>Projects & <br/><em style="color:var(--accent)">contributions.</em>.</h2>
+    <h2>Things I've<br/>actually <em style="color:var(--accent)">built</em>.</h2>
     <div class="projects-grid reveal">
 
       <!-- Tip Distributor -->
@@ -84,9 +84,9 @@
         </div>
       </a>
 
-      <!-- AI Threat Hunter Chatbot -->
+      <!-- AI Threat Hunter -->
       <a class="project-card" href="projects/threat-hunter.html">
-        <img class="project-screenshot" src="assets/images/threathunterImage.png" alt="AI Threat Hunter Chatbot"/>
+        <img class="project-screenshot" src="assets/images/threathunterImage.png" alt="AI Threat Hunter"/>
         <div class="project-body">
           <div class="project-title">AI Threat Hunter</div>
           <p class="project-desc">A security-focused AI chatbot that analyzes Wazuh logs using RAG. Queries a vectorized log store via LLaMA3 to surface threats and anomalies in real time.</p>
@@ -96,6 +96,22 @@
             <span class="tag">LangChain</span>
             <span class="tag">LLaMA3</span>
             <span class="tag">FAISS</span>
+            <span class="tag">Elasticsearch</span>
+          </div>
+          <div class="project-arrow">View Project →</div>
+        </div>
+      </a>
+
+      <!-- MCP Log Forwarder -->
+      <a class="project-card" href="projects/mcp-log-forwarder.html">
+        <img class="project-screenshot" src="assets/images/mcpImage.png" alt="MCP Log Forwarder" style="object-position: top;"/>
+        <div class="project-body">
+          <div class="project-title">MCP Log Forwarder</div>
+          <p class="project-desc">A self-hosted log routing server with a web UI for managing forwarding destinations like Elasticsearch, configured dynamically through a JSON-backed interface.</p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Jinja2</span>
             <span class="tag">Elasticsearch</span>
           </div>
           <div class="project-arrow">View Project →</div>
