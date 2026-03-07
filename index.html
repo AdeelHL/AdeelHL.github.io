@@ -14,25 +14,30 @@
       padding: 8rem 3.5rem 4rem;
       position: relative; overflow: hidden;
     }
-    .hero-bg-grid {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
-    }
-    .hero-glow {
-      position: absolute; width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(124,106,255,0.12) 0%, transparent 70%);
-      top: 50%; left: 10%; transform: translate(-50%, -50%);
+
+    /* Black hole canvas */
+    #blackhole-canvas {
+      position: absolute;
+      top: 50%; right: -5%;
+      transform: translateY(-50%);
+      width: 680px; height: 680px;
       pointer-events: none;
+      opacity: 0.9;
     }
-    .hero-glow2 {
-      position: absolute; width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(0,229,192,0.08) 0%, transparent 70%);
-      top: 30%; right: 5%; pointer-events: none;
+
+    /* Fade the canvas edge into the bg on the left */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 75%;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: 1;
     }
+
+    .hero-content { position: relative; z-index: 2; }
+
     .hero-tag {
       font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--accent); margin-bottom: 1.5rem;
@@ -40,6 +45,7 @@
       opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
     }
     .hero-tag::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--accent); }
+
     h1 {
       font-family: 'Syne', sans-serif;
       font-size: clamp(3.2rem, 8vw, 7rem);
@@ -48,6 +54,7 @@
       opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
     }
     h1 .outline { -webkit-text-stroke: 1px rgba(255,255,255,0.25); color: transparent; }
+
     .hero-sub {
       margin-top: 2rem; max-width: 44ch;
       font-size: 0.9rem; line-height: 1.75; color: var(--muted);
@@ -62,6 +69,7 @@
       font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--muted); display: flex; align-items: center; gap: 0.8rem;
       opacity: 0; animation: fadeUp 0.8s 1.2s forwards;
+      z-index: 2;
     }
     .scroll-line {
       width: 1px; height: 40px;
@@ -94,10 +102,14 @@
       color: var(--muted); text-transform: uppercase; margin-bottom: 1rem;
     }
 
+    @media (max-width: 900px) {
+      #blackhole-canvas { width: 420px; height: 420px; right: -15%; }
+    }
     @media (max-width: 768px) {
       #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
       .hero-scroll { left: 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      #blackhole-canvas { width: 320px; height: 320px; right: -20%; opacity: 0.5; }
     }
   </style>
 </head>
@@ -117,18 +129,20 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-bg-grid"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-glow2"></div>
-    <div class="hero-tag">Available for work</div>
-    <h1>Full&#8209;Stack<br/><span class="outline">Software</span><br/>Engineer</h1>
-    <p class="hero-sub">
-      I build web applications, backend services, and system integrations with a focus on performance, reliability, and clean architecture.
-    </p>
-    <div class="hero-ctas">
-      <a class="btn btn-primary" href="projects.html">View Projects →</a>
-      <a class="btn btn-ghost" href="contact.html">Get in Touch</a>
+    <canvas id="blackhole-canvas"></canvas>
+
+    <div class="hero-content">
+      <div class="hero-tag">Available for work</div>
+      <h1>Full&#8209;Stack<br/><span class="outline">Software</span><br/>Engineer</h1>
+      <p class="hero-sub">
+        I build web applications, backend services, and system integrations with a focus on performance, reliability, and clean architecture.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="projects.html">View Projects →</a>
+        <a class="btn btn-ghost" href="contact.html">Get in Touch</a>
+      </div>
     </div>
+
     <div class="hero-scroll">
       <div class="scroll-line"></div>
       Scroll
@@ -174,5 +188,147 @@
   </footer>
 
   <script src="assets/main.js"></script>
+  <script>
+    // ============================================
+    // BLACK HOLE CANVAS
+    // ============================================
+    const canvas = document.getElementById('blackhole-canvas');
+    const ctx = canvas.getContext('2d');
+
+    const SIZE = canvas.offsetWidth || 680;
+    canvas.width = SIZE;
+    canvas.height = SIZE;
+
+    const cx = SIZE / 2;
+    const cy = SIZE / 2;
+
+    // Particle system — orbiting debris
+    const PARTICLE_COUNT = 320;
+    const particles = [];
+
+    function randomBetween(a, b) { return a + Math.random() * (b - a); }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const angle = randomBetween(0, Math.PI * 2);
+      // Distribute across an accretion ring
+      const radius = randomBetween(110, 260);
+      const speed = randomBetween(0.0008, 0.003) * (1 + (260 - radius) / 150);
+      const size  = randomBetween(0.4, 2.2);
+      // Slight elliptical tilt
+      const tiltX = randomBetween(0.25, 0.55);
+
+      // Color: mix of orange/white near core, purple further out
+      const t = (radius - 110) / 150; // 0 = inner, 1 = outer
+      const r = Math.round(255 - t * 130);
+      const g = Math.round(140 - t * 100);
+      const b = Math.round(60  + t * 195);
+      const a = randomBetween(0.4, 1.0);
+
+      particles.push({ angle, radius, speed, size, tiltX, color: `rgba(${r},${g},${b},${a})` });
+    }
+
+    // Gravitational lensing distortion ring layers
+    const lensRings = [
+      { r: 95,  width: 18, alpha: 0.18, color: '180,120,60'  },
+      { r: 78,  width: 10, alpha: 0.25, color: '220,160,80'  },
+      { r: 64,  width: 6,  alpha: 0.35, color: '255,200,100' },
+      { r: 55,  width: 4,  alpha: 0.45, color: '255,220,140' },
+    ];
+
+    let t = 0;
+
+    function drawBlackHole() {
+      ctx.clearRect(0, 0, SIZE, SIZE);
+
+      // Outer ambient glow
+      const outerGlow = ctx.createRadialGradient(cx, cy, 60, cx, cy, SIZE * 0.48);
+      outerGlow.addColorStop(0,   'rgba(124,80,20,0.0)');
+      outerGlow.addColorStop(0.3, 'rgba(100,60,180,0.07)');
+      outerGlow.addColorStop(0.6, 'rgba(60,30,120,0.12)');
+      outerGlow.addColorStop(1,   'rgba(10,10,15,0)');
+      ctx.fillStyle = outerGlow;
+      ctx.fillRect(0, 0, SIZE, SIZE);
+
+      // Accretion disk glow behind the hole
+      const diskGlow = ctx.createRadialGradient(cx, cy + 8, 40, cx, cy, 200);
+      diskGlow.addColorStop(0,    'rgba(255,160,40,0.55)');
+      diskGlow.addColorStop(0.25, 'rgba(200,80,20,0.3)');
+      diskGlow.addColorStop(0.5,  'rgba(120,40,160,0.15)');
+      diskGlow.addColorStop(1,    'rgba(0,0,0,0)');
+      ctx.fillStyle = diskGlow;
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, 210, 60, -0.15, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Sort particles: draw back half first (behind hole)
+      const back  = particles.filter(p => Math.sin(p.angle) < 0);
+      const front = particles.filter(p => Math.sin(p.angle) >= 0);
+
+      function drawParticles(list) {
+        list.forEach(p => {
+          p.angle += p.speed;
+          const x = cx + Math.cos(p.angle) * p.radius;
+          const y = cy + Math.sin(p.angle) * p.radius * p.tiltX;
+          ctx.beginPath();
+          ctx.arc(x, y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+        });
+      }
+
+      drawParticles(back);
+
+      // Gravitational lensing rings
+      lensRings.forEach(ring => {
+        const pulse = 1 + Math.sin(t * 1.2) * 0.018;
+        const grad = ctx.createRadialGradient(cx, cy, ring.r * pulse - ring.width, cx, cy, ring.r * pulse + ring.width);
+        grad.addColorStop(0,   `rgba(${ring.color},0)`);
+        grad.addColorStop(0.5, `rgba(${ring.color},${ring.alpha})`);
+        grad.addColorStop(1,   `rgba(${ring.color},0)`);
+        ctx.beginPath();
+        ctx.arc(cx, cy, ring.r * pulse, 0, Math.PI * 2);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = ring.width * 2;
+        ctx.stroke();
+      });
+
+      // Event horizon — pure black circle
+      const horizonGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 52);
+      horizonGrad.addColorStop(0,   '#000000');
+      horizonGrad.addColorStop(0.7, '#000000');
+      horizonGrad.addColorStop(1,   'rgba(0,0,0,0.92)');
+      ctx.beginPath();
+      ctx.arc(cx, cy, 52, 0, Math.PI * 2);
+      ctx.fillStyle = horizonGrad;
+      ctx.fill();
+
+      // Innermost photon ring shimmer
+      const shimmer = 0.6 + Math.sin(t * 2.5) * 0.4;
+      const photonGrad = ctx.createRadialGradient(cx, cy, 48, cx, cy, 58);
+      photonGrad.addColorStop(0,   `rgba(255,200,100,0)`);
+      photonGrad.addColorStop(0.5, `rgba(255,180,60,${0.5 * shimmer})`);
+      photonGrad.addColorStop(1,   `rgba(255,140,20,0)`);
+      ctx.beginPath();
+      ctx.arc(cx, cy, 53, 0, Math.PI * 2);
+      ctx.strokeStyle = photonGrad;
+      ctx.lineWidth = 5;
+      ctx.stroke();
+
+      // Front particles (in front of hole)
+      drawParticles(front);
+
+      t += 0.012;
+      requestAnimationFrame(drawBlackHole);
+    }
+
+    drawBlackHole();
+
+    // Resize handler
+    window.addEventListener('resize', () => {
+      const newSize = canvas.offsetWidth;
+      canvas.width = newSize;
+      canvas.height = newSize;
+    });
+  </script>
 </body>
 </html>
