@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MCP Log Forwarder — Adeel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../assets/style.css"/>
+  <style>
+    .project-hero { padding: 10rem 3.5rem 5rem; position: relative; overflow: hidden; }
+    .hero-glow {
+      position: absolute; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(124,106,255,0.1) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; margin-bottom: 3rem; transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+    .project-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800; line-height: 1; letter-spacing: -0.04em; max-width: 18ch;
+      opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .project-summary {
+      margin-top: 1.5rem; max-width: 52ch;
+      font-size: 0.95rem; line-height: 1.8; color: var(--muted);
+      opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+    }
+    .project-links-row {
+      display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+    }
+    .screenshot-section { padding: 0 3.5rem 5rem; }
+    .main-screenshot {
+      width: 100%; aspect-ratio: 16/9; object-fit: cover;
+      object-position: top;
+      border-radius: 8px; border: 1px solid var(--border); display: block;
+    }
+    .details-section {
+      padding: 5rem 3.5rem; background: var(--surface);
+      display: grid; grid-template-columns: 2fr 1fr; gap: 5rem; align-items: start;
+    }
+    .details-section h3 {
+      font-family: 'Syne', sans-serif; font-size: 1.4rem;
+      font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1.2rem;
+    }
+    .details-section p { font-size: 0.88rem; line-height: 1.85; color: rgba(232,232,240,0.7); margin-bottom: 1rem; }
+    .info-block { margin-bottom: 2rem; }
+    .info-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .info-value { font-size: 0.85rem; color: var(--text); }
+    .tags-block { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    @media (max-width: 768px) {
+      .project-hero, .screenshot-section, .details-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .details-section { grid-template-columns: 1fr; gap: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav>
+    <a class="nav-logo" href="../index.html">home<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="project-hero">
+    <div class="hero-glow"></div>
+    <a class="back-link" href="../projects.html">← All Projects</a>
+    <div class="project-meta">
+      <span class="tag">Python</span>
+      <span class="tag">FastAPI</span>
+      <span class="tag">Jinja2</span>
+      <span class="tag">Elasticsearch</span>
+      <span class="tag">JSON</span>
+    </div>
+    <h1>MCP Log Forwarder</h1>
+    <p class="project-summary">
+      A self-hosted log routing server with a web UI for managing forwarding destinations. Supports multiple destination types including Elasticsearch, configured dynamically through a JSON-backed interface.
+    </p>
+    <div class="project-links-row">
+      <a class="btn btn-ghost" href="#">GitHub</a>
+    </div>
+  </div>
+
+  <div class="screenshot-section">
+    <img class="main-screenshot" src="../assets/images/mcpImage.png" alt="MCP Log Forwarder screenshot"/>
+  </div>
+
+  <div class="details-section reveal">
+    <div>
+      <h3>About the Project</h3>
+      <p>MCP Log Forwarder is a lightweight log routing server built with FastAPI and Jinja2. It provides a web interface for registering and managing forwarding destinations without touching config files manually.</p>
+      <p>Destinations are stored in a JSON config file and loaded at runtime. Through the UI, you can add new destinations by specifying the type, URL, credentials, and index name. The server handles routing incoming log data to the correct destination based on the config.</p>
+      <p>The project is designed to run self-hosted in internal network environments where log data shouldn't leave the local infrastructure, making it a practical companion to tools like Wazuh or other SIEM pipelines.</p>
+    </div>
+    <div>
+      <div class="info-block">
+        <div class="info-label">Year</div>
+        <div class="info-value">2025</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Role</div>
+        <div class="info-value">Backend Developer</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Stack</div>
+        <div class="tags-block">
+          <span class="tag">Python</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Jinja2</span>
+          <span class="tag">Elasticsearch</span>
+          <span class="tag">JSON</span>
+          <span class="tag">HTML / CSS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>2026</span>
+    <span>adeelhl<em>.github.io</em></span>
+  </footer>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>
