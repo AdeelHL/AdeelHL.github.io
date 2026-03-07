@@ -101,8 +101,8 @@
     <div>
       <h3>About the Project</h3>
       <p>AI Threat Hunter is a RAG-based security chatbot built on top of Wazuh log data. It ingests logs from Elasticsearch, chunks and vectorizes them using FAISS and HuggingFace embeddings, then lets analysts query them in plain English through a WebSocket-powered chat interface.</p>
-      <p>The backend runs on FastAPI with LangChain's <code style="color:var(--accent2); font-size:0.82rem">ConversationalRetrievalChain</code> wired to a locally hosted LLaMA3 model via Ollama — no external API calls, fully self-hosted. Analysts can reload the vector store, adjust the log date range, and run stats queries on the fly using slash commands.</p>
-      <p>Add anything else here — deployment notes, what you learned, or what you'd do differently.</p>
+      <p>The backend runs on FastAPI with LangChain's <code style="color:var(--accent2); font-size:0.82rem">ConversationalRetrievalChain</code> wired to a locally hosted LLaMA3 model via Ollama — no external API calls, fully self-hosted. Analysts can reload the vector store, adjust the log date range, and run stats queries on the fly using tailored commands.</p>
+      <p>Deployment is handled via a Python daemon mode, allowing the server to run as a background process on the Wazuh host itself. Authentication is enforced on all routes using HTTP Basic Auth, keeping the interface locked down to authorized analysts only.</p>
     </div>
     <div>
       <div class="info-block">
