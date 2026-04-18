@@ -80,12 +80,13 @@
     <div class="project-meta">
       <span class="tag">React.js</span>
       <span class="tag">JavaScript</span>
+      <span class="tag">Electron</span>
       <span class="tag">HTML</span>
       <span class="tag">CSS</span>
     </div>
     <h1>Tip Distributor</h1>
     <p class="project-summary">
-      A web app for fairly splitting and distributing tips across staff. Clean, easy-to-use UI with tailored logic for personal, practical use.
+      A desktop app for fairly splitting and distributing tips across staff. Built with React and packaged with Electron — runs as a standalone executable with no browser or terminal required.
     </p>
     <div class="project-links-row">
       <a class="btn btn-ghost" href="https://github.com/AdeelHL/tip-project" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -101,7 +102,7 @@
       <h3>About the Project</h3>
       <p>The Tip Distributor is a web application designed to simplify and automate how tips are divided among employees in my workplace. In many small businesses like ours, tip distribution is often calculated on paper, which can be time-consuming and prone to mistakes. This application allows managers to input tip amounts and work hours, and then automatically calculates and distributes tips based on predefined rules.</p>
       <p>The goal of the project was to create a simple and reliable tool that improves transparency and efficiency in tip management. I designed the logic to calculate each employee’s share and built the interface to let users easily enter and review data. This project helped me practice building frontend functionality, handling user input, and implementing calculation logic to solve a real-world problem.</p>
-      <p>At the time, I had no idea how to host this properly, nor did I think it was entirely necessary, so I opted for a simple .bat file to execute this locally</p>
+      <p>The app was later packaged as a standalone desktop application using Electron and Vite, producing a portable <code style="color:var(--accent2); font-size:0.82rem">.exe</code> that runs on any Windows machine without needing Node.js, a browser, or a terminal. The build process was handled with electron-builder, and the Vite config was updated to use relative paths so the bundled app loads correctly from the filesystem.</p>
     </div>
     <div>
       <div class="info-block">
@@ -117,6 +118,8 @@
         <div class="tags-block">
           <span class="tag">React.js</span>
           <span class="tag">JavaScript</span>
+          <span class="tag">Electron</span>
+          <span class="tag">Vite</span>
           <span class="tag">HTML</span>
           <span class="tag">CSS</span>
         </div>
