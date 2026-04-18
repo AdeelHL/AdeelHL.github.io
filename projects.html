@@ -26,7 +26,9 @@
     .project-card:hover { border-color: rgba(124,106,255,0.3); transform: translateY(-4px); }
     .project-screenshot {
       width: 100%; aspect-ratio: 16/9;
-      object-fit: cover; display: block;
+      object-fit: contain; display: block;
+      background: #0d0d16;
+      padding: 1rem;
       border-bottom: 1px solid var(--border);
     }
     .project-body { padding: 1.5rem; }
@@ -120,7 +122,7 @@
 
       <!-- MCP Log Forwarder -->
       <a class="project-card" href="projects/mcp-server.html">
-        <img class="project-screenshot" src="assets/images/mcpImage.png" alt="MCP Log Forwarder" style="object-position: top;"/>
+        <img class="project-screenshot" src="assets/images/mcpImage.png" alt="MCP Log Forwarder"/>
         <div class="project-body">
           <div class="project-title">MCP Log Forwarder</div>
           <p class="project-desc">A self-hosted log routing server with a web UI for managing forwarding destinations like Elasticsearch, configured dynamically through a JSON-backed interface.</p>
