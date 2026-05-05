@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tip Distributor</title>
+  <title>ImadeIt — Adeel</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../assets/style.css"/>
   <style>
@@ -77,51 +77,58 @@
     <div class="hero-glow"></div>
     <a class="back-link" href="../projects.html">← All Projects</a>
     <div class="project-meta">
-      <span class="tag">React.js</span>
-      <span class="tag">JavaScript</span>
-      <span class="tag">Electron</span>
-      <span class="tag">HTML</span>
-      <span class="tag">CSS</span>
+      <span class="tag">Next.js 16</span>
+      <span class="tag">TypeScript</span>
+      <span class="tag">Supabase</span>
+      <span class="tag">Drizzle ORM</span>
+      <span class="tag">Tailwind CSS</span>
     </div>
-    <h1>Tip Distributor</h1>
+    <h1>ImadeIt</h1>
     <p class="project-summary">
-      A desktop app for fairly splitting and distributing tips across staff. Built with React and packaged with Electron — runs as a standalone executable with no browser or terminal required.
+      A showcase platform for makers — woodworkers, software developers, illustrators, ceramicists, and anyone else who builds things. Each project pairs an image-led cover with a long-form Markdown write-up of the work behind it, and a creator's full set of projects becomes their portfolio.
     </p>
     <div class="project-links-row">
-      <a class="btn btn-ghost" href="https://github.com/AdeelHL/tip-project" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="btn btn-ghost" href="https://github.com/AdeelHL/imadeit" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
   </div>
 
   <div class="screenshot-section">
-    <img class="main-screenshot" src="../assets/images/tipImage.png" alt="Tip Distributor screenshot"/>
+    <img class="main-screenshot" src="../assets/images/imadeitImage.png" alt="ImadeIt screenshot"/>
   </div>
 
   <div class="details-section reveal">
     <div>
       <h3>About the Project</h3>
-      <p>The Tip Distributor is a web application designed to simplify and automate how tips are divided among employees in my workplace. In many small businesses like ours, tip distribution is often calculated on paper, which can be time-consuming and prone to mistakes. This application allows managers to input tip amounts and work hours, and then automatically calculates and distributes tips based on predefined rules.</p>
-      <p>The goal of the project was to create a simple and reliable tool that improves transparency and efficiency in tip management. I designed the logic to calculate each employee’s share and built the interface to let users easily enter and review data. This project helped me practice building frontend functionality, handling user input, and implementing calculation logic to solve a real-world problem.</p>
-      <p>The app was later packaged as a standalone desktop application using Electron and Vite, producing a portable <code style="color:var(--accent2); font-size:0.82rem">.exe</code> that runs on any Windows machine without needing Node.js, a browser, or a terminal. The build process was handled with electron-builder, and the Vite config was updated to use relative paths so the bundled app loads correctly from the filesystem.</p>
+      <p>ImadeIt is a full-stack showcase platform built for makers across every discipline — anyone who wants a place to publish the work they've made and the story behind it. The interface borrows from two different worlds: an Instagram-style grid for browsing visual work at a glance, and a Medium-style detail view for the long-form write-up of materials, process, decisions, and lessons that produced each piece.</p>
+      <p>Creators sign in with a magic link — no passwords — and a database trigger provisions a profile row automatically on first sign-in. From their dashboard they can create projects with a cover image, a Markdown body, and inline images that can be uploaded mid-write and inserted at the cursor. Each project is independently set to Published, Unlisted, or Draft, comments can be toggled per project, and a slide-in Markdown cheat-sheet offers click-to-insert snippets that wrap the current selection. Browsers get public feeds, per-category pages over a curated 18-tag taxonomy, per-user portfolio pages, threaded comments, and a daily-deduplicated view counter.</p>
+      <p>The defining architectural choice is that authorization lives in the database, not the app. Every public table has Row Level Security enabled, with policies that constrain reads (published / unlisted only; drafts author-only) and writes to the row's owner. Comment-disabling is enforced at the policy layer, so even a hostile client crafting requests directly against the Supabase REST endpoint can't bypass it. View tracking flows through a <code style="color:var(--accent2); font-size:0.82rem">SECURITY DEFINER</code> Postgres function with an <code style="color:var(--accent2); font-size:0.82rem">ON CONFLICT DO NOTHING</code> insert keyed on (post_id, viewer_hash, viewed_on), making it both forgery-resistant and naturally idempotent. Storage uploads are gated by path so the bucket policy permits inserts only when the object key starts with the user's UID. Schema is owned by Drizzle as the single source of truth, with SQL migrations applied by an idempotent runner that tracks applied files in a <code style="color:var(--accent2); font-size:0.82rem">_migrations</code> ledger table.</p>
     </div>
     <div>
       <div class="info-block">
         <div class="info-label">Year</div>
-        <div class="info-value">2025</div>
+        <div class="info-value">2026</div>
       </div>
       <div class="info-block">
         <div class="info-label">Role</div>
-        <div class="info-value">Frontend Developer</div>
+        <div class="info-value">Full-Stack Developer</div>
       </div>
       <div class="info-block">
         <div class="info-label">Stack</div>
         <div class="tags-block">
-          <span class="tag">React.js</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">Electron</span>
-          <span class="tag">Vite</span>
-          <span class="tag">HTML</span>
-          <span class="tag">CSS</span>
+          <span class="tag">Next.js 16</span>
+          <span class="tag">React 19</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">Postgres</span>
+          <span class="tag">Drizzle ORM</span>
+          <span class="tag">Tailwind CSS v4</span>
+          <span class="tag">shadcn/ui</span>
+          <span class="tag">react-markdown</span>
         </div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Status</div>
+        <div class="info-value">Functional locally — Vercel deploy pending</div>
       </div>
     </div>
   </div>
